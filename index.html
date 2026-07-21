@@ -66,10 +66,36 @@
     font-size: 0.95rem;
   }
 
+  .resume-link{
+    display: inline-block;
+    margin-top: 1.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 2px;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 1px;
+    transition: background-size 0.25s ease, color 0.2s ease;
+  }
+
+  .resume-link:hover,
+  .resume-link:focus-visible{
+    color: var(--ink);
+    background-size: 100% 1px;
+  }
+
+  .resume-link:focus-visible{
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+  }
+
   .rule{
     border: none;
     border-top: 1px solid var(--hair);
-    margin: 3.2rem 0 2rem;
+    margin: 3.2rem 0 1.1rem;
   }
 
   .eyebrow{
@@ -210,7 +236,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .project-title, .project-arrow, .social, .social::after{
+    .project-title, .project-arrow, .social, .social::after, .resume-link{
       transition: none;
     }
     .project:hover .project-title{
@@ -233,6 +259,8 @@
 
   <h1 class="name">maestrowang</h1>
   <p class="tagline">arts administrator by day, <em>artist</em> by night</p>
+
+  <a class="resume-link" href="https://maestrowang.github.io/about/" target="_blank" rel="noopener">Curriculum Vitae &#8599;</a>
 
   <hr class="rule">
 
