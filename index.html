@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>maestrowang</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="description" content="arts administrator by day, artist by night">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0f0e0d;
+    --ink: #ede9e1;
+    --muted: #8c887e;
+    --hair: #2a2822;
+    --accent: #c89b3c;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ background: var(--bg); }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8vh 6vw;
+  }
+
+  main{
+    width: 100%;
+    max-width: 620px;
+  }
+
+  .name{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-size: clamp(2.6rem, 8vw, 4.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .tagline{
+    margin: 1.1rem 0 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .tagline em{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .rule{
+    border: none;
+    border-top: 1px solid var(--hair);
+    margin: 3.2rem 0 2rem;
+  }
+
+  .eyebrow{
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+  }
+
+  .projects{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--hair);
+  }
+
+  .projects .project:last-child{
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .project-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .project-title{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.28rem;
+    letter-spacing: -0.01em;
+    display: inline-block;
+    transform: translateX(0);
+    transition: color 0.2s ease, transform 0.25s ease;
+  }
+
+  .project-desc{
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+
+  .project-arrow{
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transform: translateX(0);
+    transition: transform 0.25s ease, color 0.2s ease;
+    color: var(--muted);
+  }
+
+  .project:hover .project-title,
+  .project:focus-visible .project-title{
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .project:hover .project-arrow,
+  .project:focus-visible .project-arrow{
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+
+  .project:focus-visible{
+    outline: 1px solid var(--accent);
+    outline-offset: 6px;
+  }
+
+  .socials{
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-top: 4rem;
+  }
+
+  .social{
+    position: relative;
+    color: var(--muted);
+    display: inline-flex;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .social::after{
+    content: attr(data-handle);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(2px);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--ink);
+    background: var(--hair);
+    padding: 4px 8px;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .social:hover::after,
+  .social:focus-visible::after{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .social svg{
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  .social:hover,
+  .social:focus-visible{
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .social:focus-visible{
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  footer{
+    margin-top: 3.5rem;
+    font-size: 0.68rem;
+    color: var(--hair);
+    letter-spacing: 0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .project-title, .project-arrow, .social, .social::after{
+      transition: none;
+    }
+    .project:hover .project-title{
+      transform: none;
+    }
+  }
+
+  @media (max-width: 480px){
+    .project{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .project-arrow{ display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <h1 class="name">maestrowang</h1>
+  <p class="tagline">arts administrator by day, <em>artist</em> by night</p>
+
+  <hr class="rule">
+
+  <p class="eyebrow">Projects</p>
+  <div class="projects">
+
+    <a class="project" href="https://maestrowang.github.io/seatchart" target="_blank" rel="noopener">
+      <span class="project-text">
+        <span class="project-title">Seating Chart Studio</span>
+        <span class="project-desc">Browser-based orchestral and band seating chart builder</span>
+      </span>
+      <span class="project-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+
+    <a class="project" href="https://maestrowang.github.io/calculate/" target="_blank" rel="noopener">
+      <span class="project-text">
+        <span class="project-title">Classified Calculator</span>
+        <span class="project-desc">Forward and reverse classified staff cost calculator</span>
+      </span>
+      <span class="project-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+
+  </div>
+
+  <nav class="socials" aria-label="Social links">
+
+    <a class="social" href="https://maestrowang.github.io/" target="_blank" rel="noopener" aria-label="GitHub" data-handle="GitHub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>
+      </svg>
+    </a>
+
+    <a class="social" href="https://www.instagram.com/maestro_wang" target="_blank" rel="noopener" aria-label="Instagram, @maestro_wang" data-handle="@maestro_wang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+
+    <a class="social" href="https://www.instagram.com/smmusd.vapa" target="_blank" rel="noopener" aria-label="Instagram, @smmusd.vapa" data-handle="@smmusd.vapa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+
+    <a class="social" href="https://www.linkedin.com/in/maestrowang/" target="_blank" rel="noopener" aria-label="LinkedIn" data-handle="in/maestrowang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <line x1="7.5" y1="10" x2="7.5" y2="16.5"/>
+        <circle cx="7.5" cy="7" r="0.6" fill="currentColor" stroke="none"/>
+        <path d="M11.5 16.5V10m0 3c0-2 1.5-3 3-3s2.5 1 2.5 3v3.5"/>
+      </svg>
+    </a>
+
+  </nav>
+
+  <footer>&copy; <span id="year"></span> maestrowang</footer>
+
+</main>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
